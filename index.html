@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9RK674J2KF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9RK674J2KF');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinay Kumar Chakali — Executive Portfolio</title>
+
+  <!-- Fonts (Playfair Display + Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Quiet Luxury Palette */
+      --bg: #0B0D10;
+      --panel: #141922;
+      --text: #F2F0EA;
+      --muted: #A8B0BC;
+      --line: rgba(242,240,234,0.12);
+
+      /* Accent: Navy (change to #C8B27A for Champagne Gold) */
+      --accent: #1E3A8A;
+
+      /* Typography */
+      --serif: "Playfair Display", serif;
+      --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+      /* Layout */
+      --max: 1180px;
+      --pad: clamp(18px, 3vw, 34px);
+      --sectionY: clamp(80px, 10vw, 140px);
+
+      /* Motion */
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --dur: 700ms;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 20% 10%, rgba(30,58,138,0.12), transparent 55%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(30,58,138,0.08), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    a:focus{ outline:2px solid rgba(30,58,138,0.6); outline-offset:2px; border-radius:10px; }
+
+    /* Subtle noise overlay */
+    .grain{
+      pointer-events:none;
+      position:fixed;
+      inset:0;
+      opacity:0.08;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      background-size: 260px 260px;
+    }
+
+    /* Container */
+    .wrap{
+      width:min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin:0 auto;
+    }
+
+    /* Ghost Header */
+    header{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:50;
+      transform: translateY(-20px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+    }
+    header.visible{
+      opacity:1;
+      transform: translateY(0);
+      pointer-events:auto;
+    }
+    .ghostbar{
+      width:min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin: 14px auto 0;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(11,13,16,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px;
+      min-width: 220px;
+    }
+    .brand .name{
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing:-0.02em;
+      font-size: 18px;
+      line-height:1;
+    }
+    .brand .role{
+      font-size: 12px;
+      letter-spacing:0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height:1;
+    }
+
+    nav{
+      display:flex;
+      gap: 18px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      font-size: 12px;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color: var(--muted);
+      position:relative;
+      padding: 8px 6px;
+      border-radius: 12px;
+      transition: color 240ms var(--ease), background 240ms var(--ease);
+    }
+    nav a:hover{
+      color: var(--text);
+      background: rgba(242,240,234,0.04);
+    }
+    nav a::after{
+      content:"";
+      position:absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 6px;
+      height:1px;
+      background: rgba(30,58,138,0.0);
+      transform: scaleX(0);
+      transform-origin:left;
+      transition: transform 260ms var(--ease), background 260ms var(--ease);
+    }
+    nav a:hover::after{
+      transform: scaleX(1);
+      background: rgba(30,58,138,0.8);
+    }
+
+    /* Hero */
+    .hero{
+      padding-top: clamp(42px, 8vw, 86px);
+      padding-bottom: var(--sectionY);
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(22px, 4vw, 52px);
+      align-items: stretch;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: clamp(44px, 6vw, 72px);
+    }
+    .portrait{
+      position:relative;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(242,240,234,0.06), rgba(242,240,234,0.01));
+      min-height: clamp(420px, 60vh, 660px);
+      transform: translateZ(0);
+    }
+    .portrait img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: translateY(0px) scale(1.02);
+      transition: transform 600ms var(--ease);
+      will-change: transform;
+      display:block;
+      filter: contrast(1.02) saturate(0.96);
+    }
+    .portrait::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(1000px 600px at 60% 10%, rgba(30,58,138,0.16), transparent 55%),
+                  linear-gradient(to top, rgba(11,13,16,0.62), rgba(11,13,16,0.08));
+      pointer-events:none;
+    }
+    .heroText{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      padding: clamp(10px, 1vw, 20px) 0;
+    }
+    .kicker{
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+    h1{
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing:-0.02em;
+      font-size: clamp(44px, 5vw, 74px);
+      line-height: 1.03;
+      margin:0 0 18px 0;
+    }
+    .subline{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+      max-width: 54ch;
+      margin: 0 0 26px 0;
+    }
+    .ctaRow{
+      display:flex;
+      gap: 14px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(242,240,234,0.03);
+      color: var(--text);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease);
+      will-change: transform;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(30,58,138,0.5);
+      background: rgba(30,58,138,0.12);
+    }
+    .btn.secondary{
+      background: transparent;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(30,58,138,0.12);
+    }
+
+    /* Sections */
+    section{
+      padding: var(--sectionY) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .sectionHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 20px;
+      margin-bottom: 34px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height:1.1;
+    }
+    .sectionHead .meta{
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* Vision typography */
+    .visionBig{
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(26px, 3.2vw, 44px);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0 0 26px 0;
+      max-width: 36ch;
+    }
+    .principles{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 18px;
+      background: rgba(242,240,234,0.02);
+    }
+    .pill .t{
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .pill .d{
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(242,240,234,0.92);
+      margin:0;
+    }
+
+    /* Track Record */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(242,240,234,0.03), rgba(242,240,234,0.01));
+      transition: transform 260ms var(--ease), border-color 260ms var(--ease), background 260ms var(--ease);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(30,58,138,0.5);
+      background: linear-gradient(180deg, rgba(30,58,138,0.10), rgba(242,240,234,0.01));
+    }
+    .logoRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-height: 34px;
+    }
+    .logoMark{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      display:grid;
+      place-items:center;
+      font-family: var(--serif);
+      font-weight: 600;
+      color: rgba(242,240,234,0.92);
+      background: rgba(242,240,234,0.02);
+    }
+    .logoText{
+      display:flex;
+      flex-direction:column;
+      gap: 2px;
+    }
+    .logoText .company{
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+    .logoText .title{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .years{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .metrics{
+      display:grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .metric{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 16px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(242,240,234,0.08);
+    }
+    .metric:first-child{ border-top: none; padding-top: 0; }
+    .metric .k{
+      color: rgba(242,240,234,0.92);
+      font-size: 13px;
+      line-height:1.5;
+    }
+    .metric .v{
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* Insights feed */
+    .feed{
+      display:grid;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(242,240,234,0.02);
+    }
+    .item{
+      display:grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 16px;
+      padding: 18px 18px;
+      border-top: 1px solid rgba(242,240,234,0.08);
+      align-items:center;
+      transition: background 220ms var(--ease);
+    }
+    .item:first-child{ border-top:none; }
+    .item:hover{ background: rgba(30,58,138,0.08); }
+    .date{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .headline{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .headline .h{
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .headline .p{
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin:0;
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .arrow{
+      color: rgba(242,240,234,0.85);
+      font-size: 20px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(242,240,234,0.08);
+      transition: transform 240ms var(--ease), border-color 240ms var(--ease);
+    }
+    .item:hover .arrow{
+      transform: translateX(2px);
+      border-color: rgba(30,58,138,0.5);
+    }
+
+    /* Contact */
+    .contactGrid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .contactCard{
+      border:1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(242,240,234,0.02);
+    }
+    .contactCard h3{
+      font-family: var(--serif);
+      font-weight: 600;
+      letter-spacing:-0.02em;
+      margin:0 0 10px 0;
+      font-size: 22px;
+    }
+    .contactCard p{
+      margin:0 0 16px 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+      max-width: 60ch;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(242,240,234,0.02);
+      color: rgba(242,240,234,0.92);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(30,58,138,0.5);
+      background: rgba(30,58,138,0.10);
+    }
+
+    footer{
+      padding: 34px 0 60px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .portrait{ min-height: 520px; }
+      .principles{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr; }
+      .contactGrid{ grid-template-columns: 1fr; }
+      .item{ grid-template-columns: 1fr; }
+      .arrow{ justify-self: start; }
+      .brand{ min-width: unset; }
+      nav{ justify-content:flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Ghost Header -->
+  <header id="ghostHeader" aria-label="Site Navigation">
+    <div class="ghostbar">
+      <div class="brand">
+        <div class="name">Vinay</div>
+        <div class="role">Software Engineer</div>
+      </div>
+      <nav>
+        <a href="#vision">Vision</a>
+        <a href="#track">Track Record</a>
+        <a href="#insights">Insights</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <!-- Replace the image src with your portrait -->
+        <div class="portrait reveal" id="portrait">
+          <img
+            src="https://images.unsplash.com/photo-1520975958225-0d3b7b213f7a?auto=format&fit=crop&w=1400&q=85"
+            alt="Professional portrait"
+            id="portraitImg"
+          />
+        </div>
+
+        <div class="heroText">
+          <div class="kicker reveal">Executive Portfolio • Quiet Luxury</div>
+          <h1 class="reveal">Vinay Kumar Chakali: I build reliable products that ship fast and scale cleanly.</h1>
+          <p class="subline reveal">
+            Software Engineer with a systems mindset — focused on clarity, measurable impact, and production-grade execution.
+            Based in the U.S.
+          </p>
+
+          <div class="ctaRow reveal">
+            <a class="btn" href="#track"><span class="dot"></span> View Track Record</a>
+            <a class="btn secondary" href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- VISION -->
+  <section id="vision">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <h2>Vision</h2>
+        <div class="meta">Leadership Philosophy</div>
+      </div>
+
+      <p class="visionBig reveal">
+        I lead through calm execution: simplify the system, measure what matters, and ship in a way that scales without chaos.
+      </p>
+
+      <div class="principles">
+        <div class="pill reveal">
+          <div class="t">Principle 01</div>
+          <p class="d">Build for reliability first — speed comes from stable foundations, not shortcuts.</p>
+        </div>
+        <div class="pill reveal">
+          <div class="t">Principle 02</div>
+          <p class="d">Make impact visible — define metrics early and validate outcomes continuously.</p>
+        </div>
+        <div class="pill reveal">
+          <div class="t">Principle 03</div>
+          <p class="d">Communicate with precision — fewer words, clearer decisions, faster alignment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACK RECORD -->
+  <section id="track">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <h2>Track Record</h2>
+        <div class="meta">Selected Outcomes</div>
+      </div>
+
+      <!-- Replace placeholders with your real experience + metrics -->
+      <div class="cards">
+        <div class="card reveal">
+          <div class="logoRow">
+            <div class="logo">
+              <div class="logoMark">A</div>
+              <div class="logoText">
+                <div class="company">Company A</div>
+                <div class="title">Software Engineer</div>
+              </div>
+            </div>
+            <div class="years">2023–2024</div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">Latency improvement</div>
+              <div class="v">-38%</div>
+            </div>
+            <div class="metric">
+              <div class="k">Release frequency</div>
+              <div class="v">2×</div>
+            </div>
+            <div class="metric">
+              <div class="k">Cost reduction</div>
+              <div class="v">-22%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="logoRow">
+            <div class="logo">
+              <div class="logoMark">B</div>
+              <div class="logoText">
+                <div class="company">Company B</div>
+                <div class="title">Backend Engineer</div>
+              </div>
+            </div>
+            <div class="years">2022–2023</div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">API uptime</div>
+              <div class="v">99.95%</div>
+            </div>
+            <div class="metric">
+              <div class="k">Response time</div>
+              <div class="v">-41%</div>
+            </div>
+            <div class="metric">
+              <div class="k">Incidents reduced</div>
+              <div class="v">-30%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="logoRow">
+            <div class="logo">
+              <div class="logoMark">C</div>
+              <div class="logoText">
+                <div class="company">Project / Startup</div>
+                <div class="title">Builder / Owner</div>
+              </div>
+            </div>
+            <div class="years">2024–Now</div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">Users / Adoption</div>
+              <div class="v">+1.2k</div>
+            </div>
+            <div class="metric">
+              <div class="k">Build time reduced</div>
+              <div class="v">-45%</div>
+            </div>
+            <div class="metric">
+              <div class="k">Feature delivery</div>
+              <div class="v">Weekly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="insights">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <h2>Insights</h2>
+        <div class="meta">Press & Thought Leadership</div>
+      </div>
+
+      <!-- Replace with your posts/links -->
+      <div class="feed">
+        <a class="item reveal" href="#" target="_blank" rel="noreferrer">
+          <div class="date">Jan 2026</div>
+          <div class="headline">
+            <div class="h">How I approach building production APIs</div>
+            <p class="p">A calm, structured blueprint: contracts first, observability, then scale — without surprises.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a class="item reveal" href="#" target="_blank" rel="noreferrer">
+          <div class="date">Dec 2025</div>
+          <div class="headline">
+            <div class="h">Metrics that actually matter for engineering teams</div>
+            <p class="p">Why reliability and delivery consistency beat vanity stats — and how to track it cleanly.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+
+        <a class="item reveal" href="#" target="_blank" rel="noreferrer">
+          <div class="date">Nov 2025</div>
+          <div class="headline">
+            <div class="h">Designing systems for fewer incidents</div>
+            <p class="p">Practical patterns: safe rollouts, rate-limits, graceful degradation, and postmortems.</p>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <h2>Contact</h2>
+        <div class="meta">Direct & Private</div>
+      </div>
+
+      <div class="contactGrid">
+        <div class="contactCard reveal">
+          <h3>Let’s talk.</h3>
+          <p>
+            I’m open to full-time Software Engineer opportunities. If you’re hiring or want to discuss a high-impact project,
+            the fastest way is email.
+          </p>
+          <div class="links">
+            <!-- Update these -->
+            <a class="chip" href="mailto:youremail@example.com"><span class="dot"></span> Email</a>
+            <a class="chip" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="chip" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="chip" href="#" target="_blank" rel="noreferrer">Resume (PDF)</a>
+          </div>
+        </div>
+
+        <div class="contactCard reveal">
+          <h3>Signature</h3>
+          <p style="margin-bottom:10px;">
+            <span style="font-family:var(--serif); color: var(--text);">Vinay Kumar Chakali</span><br/>
+            <span style="color:var(--muted);">Software Engineer • U.S.</span>
+          </p>
+          <p style="margin:0;">
+            Building calm, scalable systems with measurable outcomes.
+          </p>
+        </div>
+      </div>
+
+      <footer class="wrap">
+        © <span id="year"></span> Vinay Kumar Chakali • Quiet Luxury Portfolio
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    // ===== Ghost Header (appears after scroll) =====
+    const header = document.getElementById("ghostHeader");
+    const showAt = 120;
+    const onScrollHeader = () => {
+      if (window.scrollY > showAt) header.classList.add("visible");
+      else header.classList.remove("visible");
+    };
+    window.addEventListener("scroll", onScrollHeader, { passive: true });
+    onScrollHeader();
+
+    // ===== Reveal on scroll =====
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // ===== Subtle parallax on portrait =====
+    const portrait = document.getElementById("portrait");
+    const portraitImg = document.getElementById("portraitImg");
+
+    const parallax = () => {
+      if (!portrait || !portraitImg) return;
+      const rect = portrait.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const center = rect.top + rect.height / 2;
+      const delta = (center - vh / 2) / (vh / 2); // -1..1 approx
+      const y = Math.max(-10, Math.min(10, -delta * 10)); // subtle
+      portraitImg.style.transform = `translateY(${y}px) scale(1.02)`;
+    };
+
+    window.addEventListener("scroll", parallax, { passive: true });
+    window.addEventListener("resize", parallax);
+    parallax();
+
+    // ===== Smooth anchor scrolling =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
