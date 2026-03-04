@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { trackEvent } from "../../analytics";
+import { trackEvent } from "../analytics";
 
 const links = [
   { label: "home", href: "#home" },

@@ -5,7 +5,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
-import Section from "./section";
+import Section from "./Section";
 
 const ease = [0.22, 1, 0.36, 1];
 

@@ -1,88 +1,21 @@
 import { Suspense, lazy } from "react";
-import Navbar from "./src/components/Navbar";
-import Hero from "./src/components/hero";
-import Section from "./src/components/section";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Section from "./components/Section";
 import { trackEvent } from "./analytics";
+import {
+  aboutSummary,
+  certificationItems,
+  contactCopy,
+  contactInfo,
+  educationItems,
+  experienceItems,
+  jobInquirySubject,
+  projectItems,
+  skillItems,
+} from "./data/portfolioData";
 
-const HeroBackgroundFX = lazy(() => import("./src/components/HeroBackgroundFX"));
-
-const skills = [
-  "Backend Development",
-  "Data Structures & Algorithms",
-  "Object-Oriented Programming",
-  "GenAI Systems",
-  "Python, SQL, JavaScript",
-  "FastAPI, LangChain, LangGraph",
-  "SQLAlchemy, Pydantic",
-  "PostgreSQL, MySQL",
-  "ChromaDB, Pinecone",
-  "Docker, Kubernetes",
-  "Git, GitHub, Postman",
-  "OpenAI API, REST APIs",
-];
-
-const projects = [
-  {
-    title: "LLM Evaluation Platform: Monitoring Core",
-    summary:
-      "Tracked prompts, responses, latency, and token usage to make model behavior measurable and production-ready.",
-    stack: "FastAPI | SQLAlchemy | PostgreSQL",
-  },
-  {
-    title: "LLM Evaluation Platform: Quality Pipelines",
-    summary:
-      "Implemented automated evaluation workflows and performance dashboards to continuously monitor model quality.",
-    stack: "Python | FastAPI | PostgreSQL",
-  },
-  {
-    title: "LLM Evaluation Platform: API Layer",
-    summary:
-      "Designed scalable backend APIs that support AI experimentation and observability for iterative model improvements.",
-    stack: "FastAPI | Pydantic | REST APIs",
-  },
-];
-
-const experience = [
-  {
-    role: "Junior Software Engineer",
-    company: "Starlite Infotech",
-    period: "2024 - Present",
-    detail:
-      "Built Python backend services to automate sales workflows, integrated real-time client APIs, developed dynamic contract generation from templates, and improved AI agent accuracy through structured prompt engineering.",
-  },
-];
-
-const certifications = [
-  "GenAI for Beginners - Udemy",
-  "REST API (Intermediate) - HackerRank",
-  "SQL (Intermediate) - HackerRank",
-  "FastAPI Masterclass - Udemy",
-  "Docker & Kubernetes for Developers - KodeKloud",
-  "LangChain & RAG Systems - DeepLearning.AI",
-  "Python Advanced Coding & OOP - HackerRank",
-  "AWS Cloud Practitioner - AWS",
-];
-
-const education = [
-  {
-    degree: "MS in Computer Science",
-    school: "Quinnipiac University",
-    period: "2024 - 2026",
-    detail: "GPA: 3.4",
-  },
-  {
-    degree: "BSc in Computer Science",
-    school: "Osmania University",
-    period: "2020 - 2023",
-    detail: "",
-  },
-];
-
-const contact = {
-  email: "Cvinaykumaar@gmail.com",
-  github: "https://github.com",
-  linkedin: "https://www.linkedin.com",
-};
+const HeroBackgroundFX = lazy(() => import("./components/HeroBackgroundFX"));
 
 const buildGmailComposeUrl = ({ to, subject = "", body = "" }) => {
   const params = new URLSearchParams({
@@ -111,8 +44,8 @@ export default function App() {
 
     const body = [`Name: ${name}`, `Email: ${senderEmail}`, "", "Message:", message].join("\n");
     const composeUrl = buildGmailComposeUrl({
-      to: contact.email,
-      subject: "Job Opportunity Inquiry - Software Engineer - Vinay Kumar Chakali",
+      to: contactInfo.email,
+      subject: jobInquirySubject,
       body,
     });
 
@@ -141,12 +74,7 @@ export default function App() {
               <h2 className="section-title heading-font">About Me</h2>
             </header>
             <article className="about-panel">
-              <p>
-                I am Vinay Kumar Chakali, a Junior Software Engineer and MS in Computer Science
-                candidate focused on backend and AI systems. I build production-ready services,
-                API-driven workflows, and LLM evaluation pipelines that improve reliability,
-                observability, and developer efficiency.
-              </p>
+              <p>{aboutSummary}</p>
             </article>
           </Section>
         </section>
@@ -157,7 +85,7 @@ export default function App() {
               <h2 className="section-title heading-font">Skills</h2>
             </header>
             <div className="expertise-grid">
-              {skills.map((item) => (
+              {skillItems.map((item) => (
                 <div key={item} className="skill-chip">
                   {item}
                 </div>
@@ -176,7 +104,7 @@ export default function App() {
             </p>
 
             <div className="work-grid">
-              {projects.map((work) => (
+              {projectItems.map((work) => (
                 <article
                   key={work.title}
                   className="work-card magnetic-target"
@@ -198,7 +126,7 @@ export default function App() {
             </header>
 
             <div className="timeline">
-              {experience.map((item) => (
+              {experienceItems.map((item) => (
                 <article key={item.role + item.period} className="timeline-item">
                   <div className="timeline-node" />
                   <div className="timeline-content">
@@ -222,7 +150,7 @@ export default function App() {
               <h2 className="section-title heading-font">Certifications</h2>
             </header>
             <div className="expertise-grid">
-              {certifications.map((item) => (
+              {certificationItems.map((item) => (
                 <div key={item} className="skill-chip">
                   {item}
                 </div>
@@ -238,7 +166,7 @@ export default function App() {
             </header>
 
             <div className="timeline">
-              {education.map((item) => (
+              {educationItems.map((item) => (
                 <article key={item.degree + item.school} className="timeline-item">
                   <div className="timeline-node" />
                   <div className="timeline-content">
@@ -262,11 +190,7 @@ export default function App() {
             <header className="section-head">
               <h2 className="section-title heading-font">Let&apos;s Connect</h2>
             </header>
-            <p className="section-intro contact-intro">
-              I am open to Software Engineer, Backend Engineer, and AI Systems opportunities. If
-              you are building scalable backend platforms or LLM-powered products, I would be glad
-              to connect.
-            </p>
+            <p className="section-intro contact-intro">{contactCopy}</p>
 
             <div className="contact-layout">
               <form
@@ -297,7 +221,7 @@ export default function App() {
 
               <div className="contact-links">
                 <a
-                  href={contact.github}
+                  href={contactInfo.github}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary magnetic-target"
@@ -307,7 +231,7 @@ export default function App() {
                   GitHub
                 </a>
                 <a
-                  href={contact.linkedin}
+                  href={contactInfo.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary magnetic-target"
@@ -318,8 +242,8 @@ export default function App() {
                 </a>
                 <a
                   href={buildGmailComposeUrl({
-                    to: contact.email,
-                    subject: "Job Opportunity Inquiry - Software Engineer - Vinay Kumar Chakali",
+                    to: contactInfo.email,
+                    subject: jobInquirySubject,
                   })}
                   target="_blank"
                   rel="noreferrer"
